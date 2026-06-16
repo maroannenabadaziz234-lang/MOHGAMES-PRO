@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الأخبار - MOHGAMES PRO</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+<div class="logo">
+<h1>MOHGAMES PRO</h1>
+</div>
+
+<nav class="navbar">
+<a href="index.html">الرئيسية</a>
+<a href="news.html" class="active">الأخبار</a>
+</nav>
+</header>
+
+<section class="news-section">
+
+<h2 class="section-title">آخر الأخبار</h2>
+
+<div class="news-grid">
+
+<div class="news-card">
+<img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800">
+<div class="news-content">
+<h3>تحديث GTA Online</h3>
+<p>إضافات جديدة وتحسينات ضخمة على اللعب.</p>
+<span>2026-06-05</span>
+<a href="#" class="news-btn">اقرأ المزيد</a>
+</div>
+</div>
+
+<div class="news-card">
+<img src="https://images.unsplash.com/photo-1520975954732-35dd22299614?w=800">
+<div class="news-content">
+<h3>Red Dead Redemption 3</h3>
+<p>تسريبات قوية حول تطوير الجزء الجديد.</p>
+<span>2026-06-04</span>
+<a href="#" class="news-btn">اقرأ المزيد</a>
+</div>
+</div>
+
+<div class="news-card">
+<img src="https://images.unsplash.com/photo-1605901309584-818e25960a8f?w=800">
+<div class="news-content">
+<h3>Fortnite الموسم الجديد</h3>
+<p>خرائط وأسلحة جديدة بالكامل.</p>
+<span>2026-06-03</span>
+<a href="#" class="news-btn">اقرأ المزيد</a>
+</div>
+</div>
+
+<div class="news-card">
+<img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800">
+<div class="news-content">
+<h3>Minecraft تحديث ضخم</h3>
+<p>تحسينات رسومية ونظام إضاءة جديد.</p>
+<span>2026-06-02</span>
+<a href="#" class="news-btn">اقرأ المزيد</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>const newsContainer = document.getElementById("newsContainer");
+
+async function loadNews() {
+
+try {
+const res = await fetch("https://gnews.io/api/v4/search?q=gaming&lang=en&token=YOUR_API_KEY");
+const data = await res.json();
+
+newsContainer.innerHTML = "";
+
+data.articles.forEach(article => {
+
+newsContainer.innerHTML += `
+<div class="news-card">
+
+<img src="${article.image || 'https://via.placeholder.com/400'}">
+
+<div class="news-content">
+
+<h3>${article.title}</h3>
+
+<p>${article.description || ''}</p>
+
+<span>${new Date(article.publishedAt).toLocaleDateString()}</span>
+
+<a href="${article.url}" target="_blank" class="news-btn">اقرأ المزيد</a>
+
+</div>
+</div>
+`;
+});
+
+} catch (err) {
+console.error("خطأ في جلب الأخبار", err);
+}
+}
+
+loadNews();

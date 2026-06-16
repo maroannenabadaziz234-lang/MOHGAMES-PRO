@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>تفاصيل الخبر</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="article"></div>
+
+<script src="news.js"></script>
+
+<script>
+const id = Number(localStorage.getItem("newsId"));
+const article = document.getElementById("article");
+
+const item = news.find(n => n.id === id);
+
+if(item){
+
+article.innerHTML = `
+<h1>${item.title}</h1>
+
+<img src="${item.img}" style="width:100%;max-height:400px;object-fit:cover">
+
+<p>${item.desc}</p>
+
+<p><strong>اللعبة:</strong> ${item.game}</p>
+
+<!-- 💰 إعلان AdSense -->
+<div style="margin:20px 0;text-align:center;">
+  <p>إعلان</p>
+  <div style="background:#ddd;height:100px;">Ad Space</div>
+</div>
+
+<p>
+هذا الخبر يجلب زيارات → زيارات = أرباح من Google AdSense أو أي إعلان آخر.
+</p>
+
+</div>
+`;
+
+}else{
+article.innerHTML = "<h2>الخبر غير موجود</h2>";
+}
+</script>
+
+</body>
+</html>
+<div class="ad-box">
+<p>📢 إعلان</p>
+<div class="ad-placeholder">Ad Space Article</div>
+</div>
